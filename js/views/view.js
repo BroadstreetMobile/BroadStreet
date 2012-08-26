@@ -12,8 +12,10 @@ define(['jquery',
 		'controls/button',
 		'controls/viewController/mainView',
 		'controls/spinner',
-		'views/page2'
-], function($, Backbone, Model, template,Label,Selection,Toggle,Input,Alert,ScrollView,Picture,Button,MainView,Spinner,Page2){
+		'views/page2',
+		'views/page3',
+		'controls/navigationController/navBarController',
+], function($, Backbone, Model, template,Label,Selection,Toggle,Input,Alert,ScrollView,Picture,Button,MainView,Spinner,Page2,Page3,NavBar){
 
     var View = Backbone.View.extend({
 
@@ -44,7 +46,7 @@ define(['jquery',
         	Spinner1.showSpinner();
         	setTimeout(function(){
         		Spinner1.hideSpinner();
-        	},1000);
+        	},2000);
         	
         	var Label1 = new Label("controls_right",this).render();
         	Label1.setTitle("Label");
@@ -88,11 +90,27 @@ define(['jquery',
         	Btn1.setIcon("arrowalt");
         	
         	
+        	
+        },
+        navBar: function(){
+        	
+        	//  nav : nav to a new MainView or to a childView in Mainview scope"
+        	//  link : nav to any other link
+        	this.navbar = new NavBar().render(this.app); // set the start location;
+        	this.navbar.addButton("gear","Settings",{"nav":this.page2});
+        	this.navbar.addButton("video","Video",{"nav":this.page3});
+        	this.navbar.addButton("githubalt","GitHub",{"link":"https://github.com/DarrenHurst/BroadStreet"});
         },
         alertButton: function(e){
         	console.log(e);
-        	e.page1.flipOut();
-        	e.page2.slideLeft();
+        		var Spinner1 = new Spinner("a");
+        	Spinner1.showSpinner("dots");
+        	setTimeout(function(){
+        		Spinner1.hideSpinner();
+        	},2000);
+        	e.page1.fadeOut();
+        	//e.page2.flipIn();
+       	    e.page2.slideRight();
         },
 
         events: {
@@ -116,7 +134,7 @@ define(['jquery',
             // page1.slideIn();
             // page1.slideRight();
             this.page1.slideLeft();
-           // this.page1.flipIn();
+            //this.page1.flipIn();
             
             
             //create the page2 in main View
@@ -131,13 +149,18 @@ define(['jquery',
             
             
             
-            var page3 =  this.app.setPage(this.app);
+            this.page3 =  this.app.setPage(this.app);
+            var page3obj = new Page3(this);
+            this.page3.setHtml(page3obj.template);
+            page3obj.render();
              
             var page4 =  this.app.setPage(this.app);
                         
 
             //controls should be in MainView() but for sake of demoing paging they are here
             this.createControls();
+            
+            this.navBar();
 
         },
 
