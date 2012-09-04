@@ -27,12 +27,20 @@ define(['jquery',
        
         // View constructor
         initialize: function() {
-
+            document.getElementsByTagName('BODY')[0].innerHTML = '';
             // Setting the view's model property to the passed in model
             this.model = new Model();
 
             // Setting the view's template property
             this.template = _.template( template, { model: this.model.toJSON() } );
+            
+            
+            var fbiframe = '<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FBroadstreetMobile&amp;width=292&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=true&amp;appId=153402774797488" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>';
+           
+            var googleplus = '<div class="g-plusone" data-annotation="none" data-width="300"></div>'+
+						"<script type='text/javascript'>(function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;po.src = 'https://apis.google.com/js/plusone.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script>";
+            
+            $('BODY').append('<div id="header"><a href="https://github.com/DarrenHurst/BroadStreet">BroadStreet</a></div><div id="fb">'+fbiframe+'</div><div id="google">'+ googleplus+'</div>');
             
 
         },
@@ -96,10 +104,13 @@ define(['jquery',
         	
         	//  nav : nav to a new MainView or to a childView in Mainview scope"
         	//  link : nav to any other link
-        	this.navbar = new NavBar().render(this.app); // set the start location;
-        	this.navbar.addButton("gear","Settings",{"nav":this.page2});
-        	this.navbar.addButton("video","Video",{"nav":this.page3});
+        	this.navbar = new NavBar().render(this.app); 
+            this.navbar.addButton("twitter","Twitter Example",{"link":"#twitter"});//https://twitter.com/ITS_A_NERD// set the start location;
+        	this.navbar.addButton("gear","page2 nav example",{"nav":this.page2});
+        	this.navbar.addButton("video","page3 nav example",{"nav":this.page3});
         	this.navbar.addButton("githubalt","GitHub",{"link":"https://github.com/DarrenHurst/BroadStreet"});
+        	this.navbar.addButton("linkedin","LinkedIn",{"link":"http://ca.linkedin.com/pub/darren-hurst/23/299/149"});
+     		this.navbar.addButton("i","Read My Blog",{"link":"http://newdev.tumblr.com/"});
         },
         alertButton: function(e){
         	console.log(e);
