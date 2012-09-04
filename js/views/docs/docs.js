@@ -1,7 +1,7 @@
 define(['jquery', 
 		'backbone',
 		'models/model', 
-		'text!templates/page3.html',
+		'text!templates/docs/docs.html',
 		'controls/labelBox',
 		'controls/selectionList',
 		'controls/toggle',
@@ -11,25 +11,28 @@ define(['jquery',
 		'controls/picture',
 		'controls/button',
 		'controls/viewController/mainView',
+		'controls/spinner',
+		'views/page2',
+		'views/page3',
 		'controls/popup',
-		'icons/icons',
 		'models/twitter',
-		'controls/listView'
-], function($, Backbone, Model, template,Label,Selection,Toggle,Input,Alert,ScrollView,Picture,Button,MainView,Popup,Icons,Twitter,listView){
+		'controls/listView',
+		'controls/navigationController/navBarController',
+], function($, Backbone, Model, template,Label,Selection,Toggle,Input,Alert,ScrollView,Picture,Button,MainView,Spinner,Page2,Page3,Popup,Twitter,listView,NavBar){
 
     var View = Backbone.View.extend({
 
-        el:'#page3',
+        // Represents the actual DOM element that corresponds to your View (There is a one to one relationship between View Objects and DOM elements)
+        el: 'body',
+     
         // bind valueChange for the id of the control.
         // this is a custom events method. you can bind other events normally.
-        controlEvents:function(){
-        return {
-        	"valueChange #textInput1":"alertText",//your event.. 
-        }
-		},
+       
+        // View constructor
+      
         // View constructor
         initialize: function(page) {
-
+             document.getElementsByTagName('BODY')[0].innerHTML = '';
             // Setting the view's model property to the passed in model
             this.model = new Model();
 
@@ -69,11 +72,12 @@ define(['jquery',
         	
         	
         	
-            this.Popup1 = new Popup("controls_left3","Tweets");
-            this.Popup1.render();
+            this.Popup1 = new Popup("tweet","Tweets");
+            this.Popup1.render("top");
+            this.Popup1.hideLeftBtn();
             var Popup_Control =  this.Popup1.isControl();
-            this.Popup1.setPointer(23);
-            this.Popup1.setPosition(30,30);
+            this.Popup1.setPointer(25);
+            this.Popup1.setPosition(180,10);
             //alert(Popup_Control);
             this.ScrollView1 = new ScrollView(Popup_Control,this).render();
             
@@ -83,53 +87,54 @@ define(['jquery',
             this.twitter = new Twitter(this);
         
             
-            this.Popup2 = new Popup("controls_left3","Just Text");
-            this.Popup2.render("top"); // top is handle pointer on top.
-            this.Popup2.setContent("This is just a text popup and takes html or text");
-            this.Popup2.setPosition(300,247);
-             
-          
-         
-            var Btn2 =  new Button().render("controls_left3");
-         	Btn2.setText("Show Control Pop");
+     
+            var Btn2 =  new Button().render("tweet");
+         	Btn2.setText("show tweets @ITS_A_NERD");
         	Btn2.setEvent(this,"showPop1");
         	
-        	var Btn3 =  new Button().render("controls_left3");
-         	Btn3.setText("Show Text Pop");
-        	Btn3.setEvent(this,"showPop2");
-        	
-        	var Btn1 =  new Button().render("controls_right3");
-        	Btn1.setText("Back to page 1");
-        	Btn1.setEvent(this,"alertButton");
-        	Btn1.setIcon("arrowleftalt","left");
         	
         	//TODO move icon render to control
         	//icon.renderByName("arrowalt","icon","270-#fff:5-#AAA:100","#555");
         	
         },
-        showPop1: function(e){
+          showPop1: function(e){
         	e.Popup1.setShow();
         },
-        showPop2: function(e){
-        	e.Popup2.setShow();
-        },
-        alertButton: function(e){
-        	console.log(e);
-        	e.parentView.page3.hide();
-        	e.parentView.page1.slideDown();
-        },
-
         events: {
 
           
 	    },
 
+           navBar: function(){
+        	
+        	//  nav : nav to a new MainView or to a childView in Mainview scope"
+        	//  link : nav to any other link
+        	this.navbar = new NavBar().render(this.app); // set the start location;
+        	this.navbar.addButton("home","Home",{"link":"#"});
+     		this.navbar.addButton("i","Read My Blog",{"link":"http://newdev.tumblr.com/"});
+        },
+
         render: function() {
 
-              this.createControls();
+            //this.$el.find("#MainPage").append(this.template);
             
-              return this;
-       
+            
+            
+            this.app = new MainView().render(this.$el.selector);
+            
+            
+            
+            this.page1 =  this.app.setPage(this.app);
+            this.page1.setHtml(this.template);
+            // page1.setClass("bsm_page");
+            // page1.slideIn();
+            // page1.slideRight();
+            this.page1.slideLeft();
+            //this.page1.flipIn();
+            
+            this.createControls();
+            this.navBar();
+
         },
 
       
@@ -138,4 +143,3 @@ define(['jquery',
 	
     // Returns the View class
     return View;
-});

@@ -7,13 +7,25 @@ $backgroundColor:#fff;
 $minWidth:100%;
 $padding:15px;
 
+$darkheader:linear-gradient(top, #7d828c 0%,#303749 50%,  #121a2e 50%, #121a2e 100%);
 $toggleon: linear-gradient(bottom , rgb(27,54,122) 0%,rgb(93,146,247) 100%);
 $toggleoff: linear-gradient(top , rgb(251,251,251) 0%,rgb(189,189,189) 100%);
+$listview: linear-gradient(top , rgb(255,255,255) 0%,rgb(199,199,199) 100%);
 $blueBar: linear-gradient(top, #6FACD5  0%, #497BAE 100%);
 $greenBar: linear-gradient(top,#74B042 0%, #56A00E 100%);
 
 //$spinner:image-url("../css/images/controls/spinner.gif");
 
+.container_12{
+  width:100%;
+  
+}
+.grid_6{
+  margin:10px;
+  width:400px;
+  display:inline-block;
+  float:left;
+}
 @font-face {
     font-family: 'HelveticaNeue';
     src: url('./fonts/helveticaneueltstd-roman-webfont.eot');
@@ -104,16 +116,12 @@ vertical-align: top;
 }
 .bsm_cell_nopadding{
   padding:6px;
-  
-
-
 }
 
 .bsm_emtcell_accountName {
   display:inline-block;
   font-weight:bold; 
 }
-
 
 /// input control
 
@@ -124,9 +132,9 @@ vertical-align: top;
     width:100%;
     border:1px $borderColor solid;
     background-color:$backgroundColor;
-    border-radius:5px !important;  
-  
+    border-radius:5px !important;    
 }
+
 .bsm-textarea-input{
    color:$darkgrey;
    padding:13px;
@@ -135,8 +143,6 @@ vertical-align: top;
    border:1px $borderColor solid;
    background-color:$backgroundColor;
    border-radius:5px !important;  
-
-  
 }
  .bsm-input-icon{
      right:15px;
@@ -188,8 +194,7 @@ vertical-align: top;
  }
  
  expanding_visible{
-   display: inline-block;
-   
+   display: inline-block; 
  }
  expanding_invisible{
    display: none;
@@ -201,7 +206,7 @@ vertical-align: top;
     padding:$padding;
     border:1px $borderColor solid;
     background-color:$backgroundColor;
-     color:$darkgrey;
+    color:$darkgrey;
     @include border-radius(5px);  
      .bsm_cell_accountName{
       white-space: nowrap;
@@ -358,7 +363,7 @@ vertical-align: top;
       }
 }
 
-///nuttons
+///buttons
 
       .bsm_Button:hover, .bsm_Button:focus, .bsm_Button.hover {
       //padding-left:-20px;
@@ -446,14 +451,123 @@ vertical-align: top;
   left:0px;
   width:100%;
   height:100%;
-  z-index:9999998;
+  z-index:1000;
 }
+
+//header
+
+.bsm_headerbar{
+    width:100%;
+    display:block;
+    border-top:none;
+    position:relative;
+    right:5px;
+    height: 40px;
+    padding: 0px 10px;
+    @include background-image($darkheader);
+    padding-left:10px;
+    //position: relative;
+    //top:-36px;
+    z-index:5;
+    @include display-box;
+  
+     h3 {
+      margin: 0px;
+      margin-bottom: 10px;
+      color: #fff;
+      font-size: 20px;
+      line-height: 40px;
+      display: block;
+      text-align: center;
+      font-weight: bold;
+    }
+    .button
+    {
+      color: #fff;
+    
+      margin: 0 auto;
+      margin-top:10px;
+      max-height:30px;
+      //height:25px;
+      vertical-align:center;
+      text-decoration: none;
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: bold;
+     @include border-radius(5px); 
+    }
+    .right{
+       position:relative;
+       margin:10px;
+       left:-10px;
+      // float:right;
+    }
+    .button.blue
+    {
+      @include background-image($toggleon);
+      border: solid 1px rgba(25, 79, 219, 0.25);
+     @include box-shadow( 2px 2px 4px rgba(0, 0, 0, 0.5), inset 2px 2px 2px rgba(255, 255, 255, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25));
+     }  
+    .button.blue:hover, .button.blue.hover {
+      @include box-shadow( 0px 0px 4px rgba(0, 0, 0, 0.5), inset 0px 0px 2px rgba(255, 255, 255, 0.25), inset 0px 0px 2px rgba(0, 0, 0, 0.25));
+      padding: 5px 9px 3px 11px;
+    }
+    .button.black {
+      @include background-image($darkheader);
+      border: solid 1px rgba(79, 79, 79, 0.75);
+    }
+    .button.black:hover, .button.black:focus, .button.black.hover {
+      //padding-left:-20px;
+     @include background-image(linear, 0% 0%, 0% 100%, from(#121A2E), color-stop(0.5, #121A2E), color-stop(0.5, #000000), to(#000000));
+      color: #fff;
+    }
+    .button
+    {
+      margin-top: 6px;
+    }
+    .button.back {
+      position: relative;
+      left:0px;
+      margin:5px;
+      margin-right:0px;
+      //padding-left: 5px;
+     // margin-left: 8px;
+    }
+    .back.black > .pointer {
+     @include background-image(linear, left top, right bottom, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e));
+      border-left: solid 1px rgba(79, 79, 79, 0.75);
+      border: solid 1px rgba(79, 79, 79, 0.75);
+      -webkit-border-top-left-radius: 6px;
+      -webkit-border-bottom-right-radius: 6px;
+      height: 19px;
+      width: 19px;
+      //display: inline-block;
+      -webkit-transform: rotate(45deg);
+      -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.5,#000000), color-stop(0.5, transparent), to(transparent));
+      position: absolute;
+      left: -7px;
+      top: 1px;
+      -webkit-background-clip: content
+    }
+    .back:hover .pointer, .back.hover .pointer {
+     @incude background-image(linear, left top, right bottom, from(#4286f5), color-stop(0.5, #4286f5), color-stop(0.5, #194fdb), to(#194fdb));
+    }     
+  .bsm_headerbarTitle{
+     @include box-flex(1);
+     position:relative;
+     right:10px;
+    
+  }
+}
+
 
 
 //popups
 
 menu{
-    z-index:9999999;
+    z-index:1001;
+    overflow:visible;
   .pop {
   position:relative;
   border: solid 2px #6a6a6a;
@@ -461,7 +575,7 @@ menu{
   padding:0px;
   font: normal 14px/16px Helvetica, Sans-serif;
   //display:none;
-    z-index:9999999;
+  z-index:1002;
   //position:fixed;
   //bottom:40px;
   //right:20px;
@@ -470,7 +584,7 @@ menu{
   //border: solid 1px #4f4f4f;
   display:block;
   -webkit-padding-start: 0px;
-  -webkit-border-radius: 10px;
+ @include border-radius(10px); 
   -webkit-box-shadow: 0px 5px 10px #000;
   margin: 5px 5px 5px 5px !important;
  
@@ -530,7 +644,7 @@ menu{
       padding:3px;
       background-color: #e5e5e5;
       margin: 3px 3px 10px 3px !important;
-      -webkit-border-radius: 5px;
+     @include border-radius(5px); 
     
     .content {
       margin:2px;
@@ -551,42 +665,25 @@ menu{
       //padding-bottom:10px;
       //height:110px;
     }
-    .text {
-      background-color:#fff !important;
-       -webkit-overflow-scrolling: touch;
-       & > * {
-        -webkit-transform: translateZ(0px); // fix for webkit scrolling/ relative bug
-      }
-      border:1px #aaa solid;
-      //height: 248px;      
-      -webkit-border-radius: 15px;
-      -webkit-box-shadow: inset 0px 0.9px 1px rgba(125,130,140,1);
-      color:#000;
-      font-size:16px;
-      font-weight:normal;
-      margin-top:9px;
-      padding:10px;
-      background-color:#FFFFFF;
-      border:1px #aaa solid;
-      @include border-radius(5px);      
-    }
+   
   }
   }
   header {
     display:block;
     border-top:none;
     position:relative;
+    width:93%;
     height: 40px;
+   // width:100%;
     padding: 0px 10px;
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e));
-    -webkit-border-top-left-radius: 8px;
-    -webkit-border-top-right-radius: 8px;
+    @include background-image($darkheader);
+   @include border-top-left-radius(8px); 
+   @include border-top-right-radius(8px); 
     //position: relative;
     //top:-36px;
     z-index:5;
-    display: -webkit-box;
-    -webkit-box-orient: horizontal;
-    -webkit-box-align: stretch;
+    @include display-box;
+    
     
     //-webkit-box-shadow: 0 5px 4px -4px black;
 
@@ -597,33 +694,39 @@ menu{
       font-size: 20px;
       line-height: 40px;
       display: block;
-      -webkit-box-flex: 1;
       text-align: center;
       font-weight: bold;
+      
+     @include box-flex(1);
     }
     .button
     {
       color: #fff;
+      
+      margin: 0;
+      max-height:33px;
+      //height:25px;
+      vertical-align:center;
       text-decoration: none;
       display: inline-block;
       padding: 4px 10px;
       font-size: 12px;
       font-weight: bold;
-      margin: 0 auto;
-      -webkit-border-radius: 5px;
+    
+     @include border-radius(5px); 
     }
     .button.blue
     {
       background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4286f5), to(#194fdb));
       border: solid 1px rgba(25, 79, 219, 0.25);
-      -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), inset 2px 2px 2px rgba(255, 255, 255, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
-    }
+     @include box-shadow(2px 2px 4px rgba(0, 0, 0, 0.5), inset 2px 2px 2px rgba(255, 255, 255, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25));
+     }
     .button.blue:hover, .button.blue.hover {
       -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5), inset 0px 0px 2px rgba(255, 255, 255, 0.25), inset 0px 0px 2px rgba(0, 0, 0, 0.25);
       padding: 5px 9px 3px 11px;
     }
     .button.black {
-      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e));
+      @include background-image($darkheader);
       border: solid 1px rgba(79, 79, 79, 0.75);
     }
     .button.black:hover, .button.black:focus, .button.black.hover {
@@ -636,7 +739,11 @@ menu{
       margin-top: 6px;
     }
     .button.back {
-      position: relative;
+     position: relative;
+      left:0px;
+      margin:5px;
+      margin-right:0px;
+   
       //padding-left: 5px;
      // margin-left: 8px;
     }
@@ -672,7 +779,7 @@ menu{
     width:100%;
     height: 60px;
     //padding: 0px 10px;
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e));
+    @include background-image($darkheader);
      z-index:9999;
     display: -webkit-box;
     -webkit-box-orient: horizontal;
@@ -694,10 +801,10 @@ menu{
         height:60px;
         padding:2px;
         margin:1px;
-         display: inline-block;
+        display: inline-block;
         border: solid 1px rgba(79, 79, 79, 0.75);
-         -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), inset 2px 2px 2px rgba(255, 255, 255, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
-        background-image: -webkit-gradient(linear, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e));
+        @include box-shadow(2px 2px 4px rgba(0, 0, 0, 0.5), inset 2px 2px 2px rgba(255, 255, 255, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25));   
+        @include background-image(linear, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e));
         margin: 0 auto;
         .icon{
           color:#fff;
@@ -722,4 +829,28 @@ menu{
     }
  }
 
-
+.bsm_List{
+  .item{
+    min-height:70px;
+   @include background-image($listview);
+   .img{
+     height:100%;
+     vertical-align:center;
+     max-width:60px;
+     display:inline;
+     margin:3px;
+     margin-right:5px;
+     float:left;
+   }
+   .text{
+     color:#232323;
+     margin-left:54px;
+     text-align:left;
+     padding:3px;
+     font-size:13px;
+     font-weight:normal;
+     //vertical-align:top;
+    // display:inline; 
+   }
+  }
+}

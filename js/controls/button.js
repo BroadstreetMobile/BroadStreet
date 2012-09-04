@@ -19,20 +19,14 @@ define(['underscore', 'backbone','icons/icons'], function(_, Backbone,Icons) {
 	    setEvent: function(parent,method){
 	    	var that = this;
 	    	$('#'+this.cid+ '_Button').bind('click',function(){
-	    		this.trigger("click", that.execFN(method, parent, parent));
+	    		that.trigger("click", that.execFN(method, parent, parent));
 	    	})
 	    },
 	    setClass: function(name){
 	    	$('#'+this.cid+ '_Button').addClass(name).removeClass("bsm_Button");
 	    },
-	    setClickState: function(){
-	    	
-	    },
-	    setHoverOnState: function(){
-	    	
-	    },
-	    setHoverOffState: function(){
-	    	
+	    setRaidus: function(radius){
+	    	$('#'+this.cid+ '_Button').css({"border-radius":radius})
 	    },
 	    getId:function(){
 	    	return this.cid +"_Button";
