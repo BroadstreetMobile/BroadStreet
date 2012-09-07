@@ -16,7 +16,7 @@ These controls give you "Jquery Mobile" like controls but using only Jquery and 
 Follow Greg Franko  - https://github.com/gfranko/Backbone-Require-Boilerplate for the initial Boilerplate used in this project
 for more information on setting up the boiler.
 
-Broadstreet Mobile is North American’s boutique Mobile Solutions consulting firm, helping customers like RBC, CIBC, Rogers, BMO, Labatt, Yellow Pages Group, Loblaw, and other major organizations achieve sustainable data intelligence. We offer comprehensive strategy and consulting services to develop and deliver high quality end-to-end mobile, web, and social media solutions. We focus all of our efforts on delivering solutions and services through our unwavering commitment in bringing results to our customers. We are passionate about setting the standards for the next generation of mobile technology. 
+Broadstreet Mobile is North America’s boutique Mobile Solutions consulting firm, helping customers like RBC, CIBC, Rogers, BMO, Labatt, Yellow Pages Group, Loblaw, and other major organizations achieve sustainable data intelligence. We offer comprehensive strategy and consulting services to develop and deliver high quality end-to-end mobile, web, and social media solutions. We focus all of our efforts on delivering solutions and services through our unwavering commitment in bringing results to our customers. We are passionate about setting the standards for the next generation of mobile technology. 
 
 
 #Getting Started
