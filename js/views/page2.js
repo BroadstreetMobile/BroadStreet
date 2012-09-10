@@ -10,8 +10,10 @@ define(['jquery',
 		'controls/scrollView',
 		'controls/picture',
 		'controls/button',
-		'controls/viewController/mainView'
-], function($, Backbone, Model, template,Label,Selection,Toggle,Input,Alert,ScrollView,Picture,Button,MainView){
+		'controls/viewController/mainView',
+		'controls/spinner',
+		'icons/icons'
+], function($, Backbone, Model, template,Label,Selection,Toggle,Input,Alert,ScrollView,Picture,Button,MainView,Spinner,Icons){
 
     var View = Backbone.View.extend({
 
@@ -38,22 +40,48 @@ define(['jquery',
             
 
         },
-        alertText:function(e){
-        	var AlertControl = new Alert;
-        	AlertControl.setAlert(" your name is "+e.getVal());
-        },
         createControls: function(){
+        	
+         
+        	
+        	var icon = new Icons();
+        	var icon_array = icon.icons();
+        	for(x in icon_array){
+        	icon.render(icon_array[x],"controls_left2","#000","none");
+        	}
         	
         	var Btn1 =  new Button().render("controls_right2");
         	Btn1.setText("go back to page 1");
         	Btn1.setEvent(this,"alertButton");
+        	Btn1.setIcon("arrowleftalt","left");// iconname,position
         	
+        	var Btn2 =  new Button().render("controls_right2");
+        	Btn2.setText("go to page 3");
+        	Btn2.setEvent(this,"goToPage3");
+        	Btn2.setIcon("arrowalt");
+        	//TODO move icon render to control
+        	//icon.renderByName("arrowalt","icon","270-#fff:5-#AAA:100","#555");
         	
         },
-        alertButton: function(e){
+         alertButton: function(e){
+        	var Spinner1 = new Spinner("a");
+        	Spinner1.showSpinner("bar");
+        	setTimeout(function(){
+        		Spinner1.hideSpinner();
+        	},2000);
         	console.log(e);
-        	e.parentView.page2.flipOut();
-        	e.parentView.page1.slideDown();
+        	e.parentView.page2.fadeOut();
+        	e.parentView.page1.slideLeft();
+        },
+        goToPage3: function(e){
+        	var Spinner1 = new Spinner("a");
+        	Spinner1.showSpinner("bar");
+        	setTimeout(function(){
+        		Spinner1.hideSpinner();
+        	},2000);
+        	console.log(e);
+        	e.parentView.page2.fadeOut();
+        	e.parentView.page3.slideDown();
         },
 
         events: {
